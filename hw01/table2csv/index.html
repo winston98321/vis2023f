@@ -64,10 +64,10 @@ a1 = createArray(121, 13);
 b1 = createArray(12,2)
 b1[0] = ['資工碩二','111598']
 b1[1] = ['資工碩一','112598']
-b1[2] = ['資工一','112590']
-b1[3] = ['資工二','111590']
-b1[4] = ['資工三','110590']
-b1[5] = ['資工四','109590']
+b1[2] = ['資工一','112591']
+b1[3] = ['資工二','111591']
+b1[4] = ['資工三','110591']
+b1[5] = ['資工四','109591']
 b1[6] = ['電資AI碩一','112C52']
 b1[7] = ['電資AI碩二','111C52']
 b1[8] = ['創新AI碩二','111C71']
@@ -84,7 +84,7 @@ for (var i = 1; i < a1.length; i++) {
     var r =Math.floor(Math.random()*11);
     a1[i][0] = i;
     a1[i][1] = b1[r][0];
-    a1[i][2] = b1[r][1] + Math.floor(Math.random() * 999).toString().padStart(3, '0');
+    a1[i][2] = b1[r][1] + Math.floor(Math.random() * 999).toString().padStart(3, "0");
     a1[i][3] = String.fromCharCode(Math.floor(Math.random() * (end - start + 1)) + start ) +
                String.fromCharCode(Math.floor(Math.random() * (end - start + 1)) + start) +
                String.fromCharCode(Math.floor(Math.random() * (end - start + 1)) + start);
