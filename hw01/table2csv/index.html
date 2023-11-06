@@ -60,43 +60,43 @@ function createArray(length) {
     return arr;
 }
 
-a1 = createArray();     // [] or new Array()
-//alert(a1);
+a1 = createArray(121, 13); 
+b1 = createArray(12,2)
+b1[0] = ['資工碩二','111598']
+b1[1] = ['資工碩一','112598']
+b1[2] = ['資工一','112590']
+b1[3] = ['資工二','111590']
+b1[4] = ['資工三','110590']
+b1[5] = ['資工四','109590']
+b1[6] = ['電資AI碩一','112C52']
+b1[7] = ['電資AI碩二','111C52']
+b1[8] = ['創新AI碩二','111C71']
+b1[9] = ['創新AI碩一','112C71']
+b1[10] = ['電資資安碩二','111C53']
+b1[11] = ['電資資安碩一','112C53']
 
-a2 = createArray(2);    // new Array(2)
-//alert(a2);
 
-a3 = createArray(121, 13); // [new Array(2),
-                   //  new Array(2),
-                   //  new Array(2)]
-//alert(a3);
-
-a3[0] = ['序號', '班級', '學號', '姓名', 'GitHub 帳號', '作業一', '作業二', '作業三', '作業四', '作業五', '作業六', '作業七', '作業八', '作業九', '作業十']
-
-for (var i = 1; i < a3.length; i++) {
-    a3[i][0] = i;
-    a3[i][1] = '資工碩二';
-    a3[i][2] = 112598000 + Math.floor(Math.random() * 999);
-    //a3[i][1] = '路人甲'; // 4E00-9FFF
-    //a3[i][1] = String.fromCharCode(0x6771);
-    a3[i][3] = String.fromCharCode(Math.floor(Math.random() * 0x51ff + 0x4e00)) +
-               String.fromCharCode(Math.floor(Math.random() * 0x51ff + 0x4e00)) +
-               String.fromCharCode(Math.floor(Math.random() * 0x51ff + 0x4e00));
+a1[0] = ['序號', '班級', '學號', '姓名', 'GitHub 帳號', '作業一', '作業二', '作業三', '作業四', '作業五', '作業六', '作業七', '作業八', '作業九', '作業十']
+const start = 0x4e00; // 中文字符的起始Unicode编码点
+const end = 0x9fff;  // 中文字符的结束Unicode编码点
+//unicode 查詢 extension://bocbaocobfecmglnmeaeppambideimao/pdf/viewer.html?file=https%3A%2F%2Fwww.unicode.org%2Fcharts%2FPDF%2FU4E00.pdf
+for (var i = 1; i < a1.length; i++) {
+    var r =Math.floor(Math.random()*11);
+    a1[i][0] = i;
+    a1[i][1] = b1[r][0];
+    a1[i][2] = b1[r][1] + Math.floor(Math.random() * 999).toString().padStart(3, '0');
+    a1[i][3] = String.fromCharCode(Math.floor(Math.random() * (end - start + 1)) + start ) +
+               String.fromCharCode(Math.floor(Math.random() * (end - start + 1)) + start) +
+               String.fromCharCode(Math.floor(Math.random() * (end - start + 1)) + start);
     
-    
-    //a3[i][2] = 'github';
-    // https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
-    // Math.random() 會回傳一個偽隨機小數 (pseudo-random) 介於 0 到 1 之間(包含 0，不包含 1) 
-    // str.substring(indexStart[, indexEnd])
-    // number.toString(radix) 10個數字 + 26個英文字母 = 36
-    a3[i][4] = (Math.random() + 1).toString(36).substring(2);
+    a1[i][4] = (Math.random() + 1).toString(36).substring(2);
 
     
-    for (var j = 5; j < a3[0].length; j++) {
-        a3[i][j] = Math.floor(Math.random() * 10);
+    for (var j = 5; j < a1[0].length; j++) {
+        a1[i][j] = Math.floor(Math.random() * 10);
     }
 }
-//alert(a3);
+
 
 
 
@@ -109,7 +109,7 @@ var tableArr = [
 //create a Table Object
 let table = document.createElement('table');
 //iterate over every array(row) within tableArr
-for (let row of a3) {
+for (let row of a1) {
 //Insert a new row element into the table element
   table.insertRow();
 //Iterate over every index(cell) in each array(row)
