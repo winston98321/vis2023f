@@ -245,7 +245,7 @@ d3.text("./csv/data.csv").then(function(data) {
                 return d.value;
             }
         })
-        .filter(function (d, i) { return (i >= 2 && !isNaN(d.value) && d.value != ""); })
+        .filter(function (d, i) { return (i > 2 && !isNaN(d.value) && d.value != ""); })
         .attr("class", function (d, i) { 
             if (d.value == 10) return "excellent-kid"; 
             else if (d.value >= 7 ) return "good-kid"; 
