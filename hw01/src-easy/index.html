@@ -1,8 +1,15 @@
+<!--
+http://bl.ocks.org/ndarville/7075823
+https://www.oxxostudio.tw/articles/201501/svg-d3-13-csv.html
+-->
+
 <!DOCTYPE html>
-<!-- saved from url=(0065)https://tjhsieh.github.io/c/vis/vis2023f/hw01/src-easy/index.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <script src="./index_files/d3.v3.min.js"></script>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="./d3.v3.min.js"></script>
     <style>
         /* @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&display=swap'); */
 
@@ -148,6 +155,7 @@
     <h3>Data Visualization 成績</h3>
 
     <div id="div1"></div>
+
     <div id="div2"></div>
 
     <script type="text/javascript" charset="utf-8">
@@ -172,25 +180,25 @@
                 else return "poor-kid";})
             .append("img")
             .attr("src", function (d, i) { 
-                if (d == 10) return "./index_files/52.svg";
-                else if (d == 9) return "./index_files/51.svg";
-                else if (d == 8) return "./index_files/42.svg";
-                else if (d == 7) return "./index_files/41.svg";
-                else if (d == 6) return "./index_files/32.svg";
-                else if (d == 5) return "./index_files/31.svg";
-                else if (d == 4) return "./index_files/22.svg";
-                else if (d == 3) return "./index_files/21.svg";
-                else if (d == 2) return "./index_files/12.svg";
-                else if (d == 1) return "./index_files/11.svg";
-                else if (d == 0) return "./index_files/01.svg";
-                else return "./index_files/00.svg"; })
+                if (d == 10) return "./svg10/52.svg";
+                else if (d == 9) return "./svg10/51.svg";
+                else if (d == 8) return "./svg10/42.svg";
+                else if (d == 7) return "./svg10/41.svg";
+                else if (d == 6) return "./svg10/32.svg";
+                else if (d == 5) return "./svg10/31.svg";
+                else if (d == 4) return "./svg10/22.svg";
+                else if (d == 3) return "./svg10/21.svg";
+                else if (d == 2) return "./svg10/12.svg";
+                else if (d == 1) return "./svg10/11.svg";
+                else if (d == 0) return "./svg10/01.svg";
+                else return "./svg10/00.svg"; })
             .attr("x", "0")
             .attr("y", "0")
             .attr("width",  function(d, i) { return (i + 1) * 60; })
             .attr("height", function(d, i) { return (i + 1) * 60; });
 
 
-    d3.text("./csv/data.csv", function (data) {
+    d3.text("../data.csv", function (data) {
 
         //var parsedCSV = d3.csv.parseRows(data);
         parsedCSV = d3.csv.parseRows(data);
@@ -213,7 +221,7 @@
                     return d;
                 }
             })
-            .filter(function (d, i) { return (i >= 2 && !isNaN(d) && d != ""); })
+            .filter(function (d, i) { return (i > 2 && !isNaN(d) && d != ""); })
             .attr("class", function (d, i) { 
                 if (d == 10) return "excellent-kid"; 
                 else if (d >= 7 ) return "good-kid"; 
@@ -251,6 +259,6 @@
             ;
     });
     </script>
+</body>
 
-
-</body></html>
+</html>
