@@ -3,9 +3,9 @@
   https://tjhsieh.github.io/c/vis/vis2023f/
 -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>資料可視化</title>
   <link rel="icon" href="./syllabus/favicon.svg"/>
   <style>
@@ -69,9 +69,9 @@
   <svg width="1600" height="900">
     <g transform="translate(500,420)"></g>
   </svg>
+
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script>
-
     var dataset;
 
     d3.csv("csv/data.csv", function(d) {
@@ -104,16 +104,11 @@
     var cgx = 512;
     var cgy = 256;
 
-    function render(){
-
+    function render() {
       var svg = d3.select("svg"),
           width = +svg.attr("width"),
           height = +svg.attr("height"),
           size = Math.max(width, height);
-
-      let myScale = d3.scaleLinear()
-        .domain([-3, 3])
-        .rangeRound([1, 12]);
 
       var color = d3.scaleSequential(d3.interpolateRainbow)
         .domain([0, 2 * Math.PI]);
@@ -213,4 +208,5 @@
   </script>
 </body>
 </html>
+
 
