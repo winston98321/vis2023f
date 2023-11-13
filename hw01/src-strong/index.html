@@ -122,7 +122,7 @@
 
       var circles = d3.packSiblings(sumScores
         .map(function(d, i) { return { r: radiusScale(d), sumScore: d, index: i }; }))
-        .filter(function(d) { return 0 < d.x && d.x < 2000 && 0 < d.y && d.y < 1200; });
+        .filter(function(d) { return d; });
       svg
         .data(['資料可視化'])
         .append("a")
