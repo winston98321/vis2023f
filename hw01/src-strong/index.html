@@ -124,7 +124,7 @@
         .map(function(d, i) { return { r: radiusScale(d), sumScore: d, index: i }; }))
         .filter(function(d) { return d.x - d.r > -size / 2 && d.x + d.r < size / 2 && d.y - d.r > -size / 2 && d.y + d.r < size / 2; });
       svg
-        .data(['資料可視化'])
+        .data(['成績表'])
         .append("a")
         //.attr("xlink:href", './syllabus/index.html')
         .append("text")
