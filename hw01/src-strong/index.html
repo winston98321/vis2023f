@@ -1,0 +1,216 @@
+<!--
+  https://bl.ocks.org/mbostock/b07f8ae91c5e9e45719c
+  https://tjhsieh.github.io/c/vis/vis2023f/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>資料可視化</title>
+  <link rel="icon" href="./syllabus/favicon.svg"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&display=swap');
+
+    body {
+      background: rgb(159, 53, 58);
+      overflow: hidden; /* Hide scrollbars */
+    }
+
+    svg {
+      font-family: 'Noto Serif JP', serif;
+      text-shadow: 0 0 16px #FF0000, 0 0 16px #000000;
+      font-size: 128pt;
+      border: 1px solid #f9eced;
+    }
+
+    svg text {
+      fill: rgba(255, 255, 255, 0.95);
+    }
+
+    svg g text {
+      fill: rgba(255, 255, 255, 0.95);
+      font-size: 16pt;
+      text-anchor: middle;
+    }
+
+    circle {
+      stroke: #f9eced;
+      stroke-width: 0.1px;
+    }
+
+    #tooltip {
+      position: fixed;
+      width: auto;
+      height: 32px;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 16px;
+      box-shadow: 4px 4px 10px rgba(255, 128, 128, 0.4);
+      pointer-events: none;
+      padding: 0px 16px;
+    }
+
+    #tooltip.hidden {
+      display: none;
+    }
+
+    #tooltip p {
+      font-family: 'Noto Serif JP';
+      font-size: 11pt;
+      color: rgb(159, 53, 58);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="tooltip" class="hidden">
+    <p><span id="value"></span></p>
+  </div>
+
+  <svg width="1600" height="900">
+    <g transform="translate(500,420)"></g>
+  </svg>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script>
+
+    var dataset;
+
+    d3.csv("csv/data.csv", function(d) {
+      return {
+        'num': d.序號,
+        'class': d.班級,
+        'id':d.學號,
+        'name':d.姓名,
+        'account' :d['GitHub_帳號'], 
+        'hw1': +d.作業一,
+        'hw2': +d.作業二,
+        'hw3': +d.作業三,
+        'hw4': +d.作業四,
+        'hw5': +d.作業五,
+        'hw6': +d.作業六,
+        'hw7': +d.作業七,
+        'hw8': +d.作業八,
+        'hw9': +d.作業九,
+        'hw10': +d.作業十
+      };
+    }, function(error, rows) {
+      if (error) {
+        console.log('oh no');
+      } else {
+        dataset = rows;
+        render();
+      }
+    });
+
+    var cgx = 512;
+    var cgy = 256;
+
+    function render(){
+
+      var svg = d3.select("svg"),
+          width = +svg.attr("width"),
+          height = +svg.attr("height"),
+          size = Math.max(width, height);
+
+      let myScale = d3.scaleLinear()
+        .domain([-3, 3])
+        .rangeRound([1, 12]);
+
+      var color = d3.scaleSequential(d3.interpolateRainbow)
+        .domain([0, 2 * Math.PI]);
+
+      var sumScores = dataset.map(d => d.hw1 + d.hw2 + d.hw3 + d.hw4 + d.hw5 + d.hw6 + d.hw7 + d.hw8 + d.hw9 + d.hw10);
+
+      var circles = d3.packSiblings(sumScores
+        .map(d3.randomUniform(36, 66))
+        .map(function(r, i) { return { r: r, sumScore: sumScores[i] }; }))
+        .filter(function(d) { return -1500 < d.x && d.x < 1500 && -960 < d.y && d.y < 960; });
+
+      svg
+        .data(['資料可視化'])
+        .append("a")
+        .attr("xlink:href", './syllabus/index.html')
+        .append("text")
+        .attr("x", function(d) { cgx += Math.random()*200; return cgx - 448; })
+        .attr("y", function(d) { cgy += Math.random()*200; return cgy - 128; })
+        .text(function(d) { return d; });
+
+      svg
+        .select("g")
+        .selectAll("circle")
+        .data(circles)
+        .enter()
+          .append("a")
+          .append("circle")
+          .style("fill", function(d) { return color(d.angle = Math.atan2(d.y, d.x)); })
+          .attr("cx", function(d) { return Math.cos(d.angle) * (size / Math.SQRT2 + 30); })
+          .attr("cy", function(d) { return Math.sin(d.angle) * (size / Math.SQRT2 + 30); })
+          .attr("r", function(d) { return d.r - 0.25; })
+          .on("mouseover", function(d) {
+            var xPosition = Math.round(d3.mouse(this)[0]) + 500;
+            var yPosition = Math.round(d3.mouse(this)[1]) + 480;
+
+            d3.select("#tooltip")
+              .style("left", xPosition + "px")
+              .style("top", yPosition + "px")
+              .select("#value")
+              .text('Total Score: ' + d.sumScore.toFixed(2));
+
+            d3.select("#tooltip").classed("hidden", false);
+          })
+          .on("mouseout", function() {
+            d3.select("#tooltip").classed("hidden", true);
+          })
+        .transition()
+          .ease(d3.easeCubicOut)
+          .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 10; })
+          .duration(1000)
+          .attr("cx", function(d) { return d.x; })
+          .attr("cy", function(d) { return d.y; })
+        .transition()
+          .ease(d3.easeElasticInOut.amplitude(10).period(0.3))
+          .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 10; })
+          .duration(1000)
+          .style("stroke-width", '3px');
+
+      svg
+        .select("g")
+        .selectAll("text")
+        .data(circles)
+        .enter()
+          .append("text")
+          .attr("x", 1600)
+          .attr("y", 0)
+          .text(function(d,i){
+            if (i < dataset.length)
+              return dataset[i].name;
+            else
+              return String.fromCharCode(getRandomInt(19968, 40959));
+          })
+        .transition()
+          .ease(d3.easeCubicOut)
+          .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 10; })
+          .duration(1000)
+          .attr("x", function(d) { return d.x; })
+          .attr("y", function(d) { return d.y + 6; })
+        .transition()
+          .ease(d3.easeElasticOut)
+          .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 60; })
+          .duration(1000)
+          .style("font-size", '36pt')
+        .transition()
+          .ease(d3.easeQuadIn)
+          .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 10; })
+          .duration(3000)
+          .style("font-size", '16pt');
+    }
+
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min) + min);
+    }
+
+  </script>
+</body>
+</html>
+
