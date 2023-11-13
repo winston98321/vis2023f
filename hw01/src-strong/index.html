@@ -117,15 +117,16 @@
 
    
       var radiusScale = d3.scaleLinear()
-        .domain(d3.extent(sumScores))
-        .range([40, 100]);
+        .domain(d3.extent(sumScores))  // Use the min and max of sumScores as the domain
+        .range([40, 100]);  // Set the desired range of bubble sizes
 
       var circles = d3.packSiblings(sumScores
         .map(function(d, i) { return { r: radiusScale(d), sumScore: d, index: i }; }))
-        .filter(function(d) { return d; });
+        .filter(function(d) { return d.x - d.r > -size / 2 && d.x + d.r < size / 2 && d.y - d.r > -size / 2 && d.y + d.r < size / 2; });
       svg
         .data(['資料可視化'])
         .append("a")
+        //.attr("xlink:href", './syllabus/index.html')
         .append("text")
         .attr("x", function(d) { cgx += Math.random()*200; return cgx - 448; })
         .attr("y", function(d) { cgy += Math.random()*200; return cgy - 128; })
@@ -139,8 +140,16 @@
           .append("a")
           .append("circle")
           .style("fill", function(d) { return color(d.angle = Math.atan2(d.y, d.x)); })
-          .attr("cx", function(d) { return Math.cos(d.angle) * (size / Math.SQRT2 + 30); })
-          .attr("cy", function(d) { return Math.sin(d.angle) * (size / Math.SQRT2 + 30); })
+          .attr("cx", function(d) {
+            var x = Math.cos(d.angle) * (size /2 )+450;
+            console.log('x:', x);
+              return x;
+            })
+          .attr("cy", function(d) { 
+            var y = Math.sin(d.angle) * (500 );
+            console.log('y:', y);
+            return y;
+          })
           .attr("r", function(d) { return d.r - 0.25; })
           .on("mouseover", function(d) {
             var xPosition = Math.round(d3.mouse(this)[0]) + 500;
@@ -161,22 +170,21 @@
           .ease(d3.easeCubicOut)
           .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 10; })
           .duration(1000)
-          .attr("cx", function(d) { return d.x; })
-          .attr("cy", function(d) { return d.y; })
+          .attr("cx", function(d) { return d.x+400; })
+          .attr("cy", function(d) { return d.y-30; })
         .transition()
           .ease(d3.easeElasticInOut.amplitude(10).period(0.3))
           .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 10; })
           .duration(1000)
           .style("stroke-width", '3px');
-
       svg
         .select("g")
         .selectAll("text")
         .data(circles)
         .enter()
           .append("text")
-          .attr("x", function(d) { return Math.random() * width; })  // 初始随机 x 位置
-          .attr("y", function(d) { return Math.random() * height; }) // 初始随机 y 位置
+          .attr("x", 1600)
+          .attr("y", 0)
           .text(function(d,i){
             if (i < dataset.length)
               return dataset[i].name;
@@ -185,17 +193,22 @@
           })
         .transition()
           .ease(d3.easeCubicOut)
-          .delay(function(d) { return Math.sqrt(d.x * d.y * 1000); })
+          .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 10; })
           .duration(1000)
-          .attr("x", function(d) { return d.x; })
-          .attr("y", function(d) { return d.y + 6; })
-          .on("end", function() {
-            // 在这里可以生成新的随机位置并更新 text 的位置
-            d3.select(this)
-              .attr("x", function(d) { return Math.random() * width; })
-              .attr("y", function(d) { return Math.random() * height; });
-          });
+          .attr("x", function(d) { return d.x+400; })
+          .attr("y", function(d) { return d.y-36; })
+        .transition()
+          .ease(d3.easeElasticOut)
+          .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 60; })
+          .duration(1000)
+          .style("font-size", '36pt')
+        .transition()
+          .ease(d3.easeQuadIn)
+          .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 10; })
+          .duration(3000)
+          .style("font-size", '16pt');
     }
+      
 
     function getRandomInt(min, max) {
       min = Math.ceil(min);
@@ -206,3 +219,5 @@
   </script>
 </body>
 </html>
+
+
