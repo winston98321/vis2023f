@@ -115,20 +115,23 @@
 
       var sumScores = dataset.map(d => d.hw1 + d.hw2 + d.hw3 + d.hw4 + d.hw5 + d.hw6 + d.hw7 + d.hw8 + d.hw9 + d.hw10);
 
-      var circles = d3.packSiblings(sumScores
-        .map(d3.randomUniform(36, 66))
-        .map(function(r, i) { return { r: r, sumScore: sumScores[i] }; }))
-        .filter(function(d) { return -1500 < d.x && d.x < 1500 && -960 < d.y && d.y < 960; });
+   
+      var radiusScale = d3.scaleLinear()
+        .domain(d3.extent(sumScores))  // Use the min and max of sumScores as the domain
+        .range([10, 50]);  // Set the desired range of bubble sizes
 
+      var circles = d3.packSiblings(sumScores
+        .map(function(d, i) { return { r: radiusScale(d), sumScore: d, index: i }; }))
+        .filter(function(d) { return -1500 < d.x && d.x < 1500 && -960 < d.y && d.y < 960; });
       svg
         .data(['資料可視化'])
         .append("a")
-        .attr("xlink:href", './syllabus/index.html')
+        //.attr("xlink:href", './syllabus/index.html')
         .append("text")
         .attr("x", function(d) { cgx += Math.random()*200; return cgx - 448; })
         .attr("y", function(d) { cgy += Math.random()*200; return cgy - 128; })
         .text(function(d) { return d; });
-
+  
       svg
         .select("g")
         .selectAll("circle")
@@ -208,5 +211,6 @@
   </script>
 </body>
 </html>
+
 
 
