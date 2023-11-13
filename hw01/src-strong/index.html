@@ -66,7 +66,7 @@
     <p><span id="value"></span></p>
   </div>
 
-  <svg width="1600" height="900">
+  <svg width="2000" height="1200">
     <g transform="translate(500,420)"></g>
   </svg>
 
@@ -122,7 +122,7 @@
 
       var circles = d3.packSiblings(sumScores
         .map(function(d, i) { return { r: radiusScale(d), sumScore: d, index: i }; }))
-        .filter(function(d) { return -1500 < d.x && d.x < 1500 && -960 < d.y && d.y < 960; });
+        .filter(function(d) { return 0 < d.x && d.x < 2000 && 0 < d.y && d.y < 1200; });
       svg
         .data(['資料可視化'])
         .append("a")
