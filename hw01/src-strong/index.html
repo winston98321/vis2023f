@@ -118,7 +118,7 @@
    
       var radiusScale = d3.scaleLinear()
         .domain(d3.extent(sumScores))  // Use the min and max of sumScores as the domain
-        .range([10, 50]);  // Set the desired range of bubble sizes
+        .range([40, 100]);  // Set the desired range of bubble sizes
 
       var circles = d3.packSiblings(sumScores
         .map(function(d, i) { return { r: radiusScale(d), sumScore: d, index: i }; }))
