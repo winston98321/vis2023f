@@ -164,7 +164,8 @@
           .attr("cy", function(d) { return d.y; })
         .transition()
           .ease(d3.easeElasticInOut.amplitude(10).period(0.3))
-          .delay(function(d) { return Math.sqrt(d.x *.duration(1000)
+          .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 10; })
+          .duration(1000)
           .style("stroke-width", '3px');
 
       svg
