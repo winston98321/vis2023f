@@ -141,12 +141,12 @@
           .append("circle")
           .style("fill", function(d) { return color(d.angle = Math.atan2(d.y, d.x)); })
           .attr("cx", function(d) {
-            var x = Math.cos(d.angle) * (size / Math.SQRT2 + 30);
+            var x = Math.cos(d.angle) * (size /2 )+300;
             console.log('x:', x);
               return x;
             })
-          .attr("cy", function(d) {
-            var y = Math.sin(d.angle) * (size / Math.SQRT2 + 30);
+          .attr("cy", function(d) { 
+            var y = Math.sin(d.angle) * (500 );
             console.log('y:', y);
             return y;
           })
