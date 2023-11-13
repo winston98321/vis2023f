@@ -141,7 +141,7 @@
           .append("circle")
           .style("fill", function(d) { return color(d.angle = Math.atan2(d.y, d.x)); })
           .attr("cx", function(d) {
-            var x = Math.cos(d.angle) * (size /2 )+300;
+            var x = Math.cos(d.angle) * (size /2 )+450;
             console.log('x:', x);
               return x;
             })
@@ -178,37 +178,7 @@
           .duration(1000)
           .style("stroke-width", '3px');
 
-      svg
-        .select("g")
-        .selectAll("text")
-        .data(circles)
-        .enter()
-          .append("text")
-          .attr("x", 1600)
-          .attr("y", 0)
-          .text(function(d,i){
-            if (i < dataset.length)
-              return dataset[i].name;
-            else
-              return String.fromCharCode(getRandomInt(19968, 40959));
-          })
-        .transition()
-          .ease(d3.easeCubicOut)
-          .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 10; })
-          .duration(1000)
-          .attr("x", function(d) { return d.x; })
-          .attr("y", function(d) { return d.y + 6; })
-        .transition()
-          .ease(d3.easeElasticOut)
-          .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 60; })
-          .duration(1000)
-          .style("font-size", '36pt')
-        .transition()
-          .ease(d3.easeQuadIn)
-          .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 10; })
-          .duration(3000)
-          .style("font-size", '16pt');
-    }
+      
 
     function getRandomInt(min, max) {
       min = Math.ceil(min);
