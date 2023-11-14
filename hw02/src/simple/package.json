@@ -1,0 +1,14 @@
+{
+  "name": "e872ff3ae0de5aa0",
+  "main": "e872ff3ae0de5aa0@29.js",
+  "version": "29.0.0",
+  "homepage": "https://observablehq.com/d/e872ff3ae0de5aa0",
+  "author": {
+    "name": "Pokai su's Workspace",
+    "url": "https://observablehq.com/@pokai-su-ws"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
