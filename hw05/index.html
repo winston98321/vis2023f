@@ -178,14 +178,59 @@
   <!-- ------------------------------------------------>
   <div class="row hw12">
     <div class="col-md-12 twenty">
-      該次作業程式碼，請放在 https://github.com/<span style="color:red;">你的帳號</span>/vis2023f/hw<span style="color:red;">05</span>/src/ 檔案夾。
+      Simple baseline 程式碼，請放在 https://github.com/
+      <span style="color:red;">你的帳號</span>
+      /vis2023f/hw
+      <span style="color:red;">05</span>
+      /src/simple 檔案夾。
+      <br>
+      
+      <hr>
+      Medium baseline 程式碼，請放在 https://github.com/
+      <span style="color:red;">你的帳號</span>
+      /vis2023f/hw
+      <span style="color:red;">05</span>
+      /src/medium 檔案夾。
+      <br>
+      
+      <hr>
+      Strong baseline 程式碼，請放在 https://github.com/
+      <span style="color:red;">你的帳號</span>
+      /vis2023f/hw
+      <span style="color:red;">05</span>
+      /src/strong 檔案夾。
+      <br>
     </div>
   </div>
+  <!-- ------------------------------------------------>
+
+  <div class="row hw12">
+    <div class="col-md-12 twenty">
+      <h4>前往你的 Demo 網頁</h4>
+    </div>
+  </div>
+  <!-- ------------------------------------------------>
+  <div class="row hw12">
+    <div class="col-md-12 twenty">
+      <a href="https://winston98321.github.io/vis2023f/hw05/src/simple/">https://winston98321.github.io/vis2023f/hw05/src/simple/</a>
+      <hr>
+      <a href="https://winston98321.github.io/vis2023f/hw05/src/medium/">https://winston98321.github.io/vis2023f/hw05/src/medium/</a>   
+      <hr>
+      <a href="https://winston98321.github.io/vis2023f/hw05/src/strong/">https://winston98321.github.io/vis2023f/hw05/src/strong/</a>
+      </div>
+  </div>
+  <!-- ------------------------------------------------>
+  <div class="row hw12">
+    <div class="col-md-12 twenty">
+      <h4>心得報告 105 字</h4>
+    </div>
+  </div>  
+  <!-- ------------------------------------------------>
 
   <!-- ------------------------------------------------>
   <div class="row hw12">
     <div class="col-md-12 twenty">
-      心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。
+      透過Force-directed tree的視覺化工具，我成功地製作了班級人員資料分組圖，這不僅使得各組的小組長和組員資料一目瞭然，還使得資訊更加直觀且有效。在這次的任務中，我透過observable學會了如何在視覺化圖表中展示照片，並實現了展開和收縮的功能。這種方法不僅提供了視覺上的豐富性，還為資料分析提供了更多層面的理解。這次的經驗使我更深入了解了數據視覺化的重要性，並應用到實際的班級管理中，提升了工作效率。
     </div>
   </div>
 
@@ -200,20 +245,71 @@
           <th>分項描述</th>
         </tr>
         <tr>
-          <td rowspan="7" id="myTotal"></td>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox1"></td>
-          <td id='m1'>2</td>
-          <td>Simple baseline - 描述、描述、描述</td>
+          <td rowspan="0" id="myTotal"></td>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox1" checked></td>
+          <td id='m1'>1</td>
+          <td>Simple baseline - (1)實作Force-directed tree呈現分組情況</td>
         </tr>
         <tr>
           <td><input type="checkbox" class="flipswitch" id="myCheckbox2" checked></td>
-          <td id='m2'>6</td>
-          <td>Medium baseline - 描述、描述、描述 </td>
+          <td id='m2'>1</td>
+          <td>Simple baseline - (2)使節點可以被拖拉移動</td>
         </tr>
         <tr>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox3"></td>
-          <td id='m3'>2</td>
-          <td>Strong baseline - 描述、描述、描述 </td>
+        <tr>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox3" checked></td>
+          <td id='m3'>1</td>
+          <td>Simple baseline - (3)將個人圖片放入節點圓圈中</td>
+        </tr>
+        <tr>  
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox4" checked></td>
+          <td id='m4'>1</td>
+          <td>Medium baseline - (1)滑鼠移動過去顯示該成員相關資訊</td>
+        </tr>
+        <tr>  
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox5" checked></td>
+          <td id='m5'>2</td>
+          <td>Medium baseline - (2)滑鼠移動過去放大節點及圖片</td>
+        </tr>
+        <tr>  
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox6" checked></td>
+          <td id='m6'>2</td>
+          <td>Medium baseline - (3)點擊節點可以展開或縮放</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox7" checked></td>
+          <td id='m7'>2</td>
+          <td>Strong baseline - 利用蘋果成績圖環繞個人照片(小組)</td>
+        </tr>
+        
+      </table>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------>
+  <div class="row hw12">
+    <div class="col-md-12 twenty">
+      <h4><u>Simple baseline</u></h4>
+      <table style="width:100%">
+        <tr>
+          <th>(1)實作Force-directed tree呈現分組情況</th>
+          <th>(2)使節點可以被拖拉移動</th>
+          <th>(3)將個人圖片放入節點圓圈中</th>
+        </tr>
+        <tr>
+          <td>
+            <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF"
+            src="https://observablehq.com/embed/9bd1552fa1c348ce?cells=simple1"></iframe>
+          </td>
+          <td>
+            <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF"
+            src="https://observablehq.com/embed/9bd1552fa1c348ce?cells=simple2"></iframe>
+            
+          </td>
+          <td>
+            <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF"
+            src="https://observablehq.com/embed/9bd1552fa1c348ce?cells=simple3"></iframe>
+          </td>
         </tr>
       </table>
     </div>
@@ -222,54 +318,102 @@
   <!-- ------------------------------------------------>
   <div class="row hw12">
     <div class="col-md-12 twenty">
-      <video id="video1" style="width:100%;max-width:100%;" controls="">
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-      </video>
+      <h4><u>Medium baseline</u></h4>
+      <table style="width:100%">
+        <tr>
+          <th>(1)滑鼠移動過去顯示該成員相關資訊</th>
+          <th>(2)滑鼠移動過去放大節點及圖片</th>
+          <th>(3)點擊節點可以展開或縮放</th>
+        </tr>
+        <tr>
+          <td>
+            <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF"
+            src="https://observablehq.com/embed/1960c61638f35fa8@25?cells=simple1"></iframe>
+          </td>
+          <td>
+            <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF"
+            src="https://observablehq.com/embed/1960c61638f35fa8@25?cells=simple2"></iframe>
+          </td>
+          <td>
+            <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF"
+            src="https://observablehq.com/embed/1960c61638f35fa8@25?cells=simple3"></iframe>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
-
+  <!-- ------------------------------------------------>
+  <div class="row hw12">
+    <div class="col-md-12 twenty">
+      <h4><u>Strong baseline</u></h4>
+      <table style="width:100%">
+        <tr>
+          <th>利用蘋果成績圖環繞個人照片(小組)</th>
+        </tr>
+        <tr>
+          <td>
+            <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF"
+            src="https://observablehq.com/embed/89e6319bfa52d62e@18?cells=simple"></iframe>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
   <!-- ------------------------------------------------>
 
-  <!-- ------------------------------------------------>
-
-
-<script>
-  $(function() {
-    var f = function() {
-      $(this).next().text($(this).is(':checked') ? '做完' : '未做完');
-    };
-    $('input').change(f).trigger('change');
-  });
-
-  d3.select("#myCheckbox1").on("change",update);
-  d3.select("#myCheckbox2").on("change",update);
-  d3.select("#myCheckbox3").on("change",update);
-  d3.select("#myCheckbox4").on("change",update);
-  d3.select("#myCheckbox5").on("change",update);
-  d3.select("#myCheckbox6").on("change",update);
-  d3.select("#myCheckbox7").on("change",update);
-
-  update();
+  <script>
+    $(function() {
+      var f = function() {
+        $(this).next().text($(this).is(':checked') ? '做完' : '未做完');
+      };
+      $('input').change(f).trigger('change');
+    });
   
-  function update(){
-
-    var score = 0;
-
-    if (d3.select("#myCheckbox1").property("checked")){
-      score += parseInt(d3.select('#m1').html());
+    d3.select("#myCheckbox1").on("change",update);
+    d3.select("#myCheckbox2").on("change",update);
+    d3.select("#myCheckbox3").on("change",update);
+    d3.select("#myCheckbox4").on("change",update);
+    d3.select("#myCheckbox5").on("change",update);
+    d3.select("#myCheckbox6").on("change",update);
+    d3.select("#myCheckbox7").on("change",update);
+  
+    update();
+    
+    function update(){
+  
+      var score = 0;
+  
+      if (d3.select("#myCheckbox1").property("checked")){
+        score += parseInt(d3.select('#m1').html());
+      }
+  
+      if (d3.select("#myCheckbox2").property("checked")){
+        score += parseInt(d3.select('#m2').html());   
+      }
+  
+      if (d3.select("#myCheckbox3").property("checked")){
+        score += parseInt(d3.select('#m3').html());   
+      }
+  
+      if (d3.select("#myCheckbox4").property("checked")){
+        score += parseInt(d3.select('#m4').html());   
+      }
+  
+      if (d3.select("#myCheckbox5").property("checked")){
+        score += parseInt(d3.select('#m5').html());
+      }
+  
+      if (d3.select("#myCheckbox6").property("checked")){
+        score += parseInt(d3.select('#m6').html());   
+      }
+  
+      if (d3.select("#myCheckbox7").property("checked")){
+        score += parseInt(d3.select('#m7').html());   
+      }
+  
+      d3.select("#myTotal").html(score);    
     }
-
-    if (d3.select("#myCheckbox2").property("checked")){
-      score += parseInt(d3.select('#m2').html());   
-    }
-
-    if (d3.select("#myCheckbox3").property("checked")){
-      score += parseInt(d3.select('#m3').html());   
-    }
-
-    d3.select("#myTotal").html(score);    
-  }
-</script>
+  </script>
 
 </body>
 </html>
