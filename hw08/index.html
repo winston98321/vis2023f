@@ -253,7 +253,7 @@
             <td>
               <input type="checkbox" class="flipswitch" id="myCheckbox4" checked="checked" />
             </td>
-            <td id="m4">2</td>
+            <td id="m3">2</td>
             <td>Medium baseline</td>
             <td>(3)觀察有氧漫遊的資料回答問題</td>
           </tr>
@@ -261,7 +261,7 @@
             <td>
               <input type="checkbox" class="flipswitch" id="myCheckbox5" checked="checked" />
             </td>
-            <td id="m5">1</td>
+            <td id="m4">1</td>
             <td></td>
             <td>(4)觀察主題遊的資料集回答問題</td>
           </tr>
@@ -269,7 +269,7 @@
             <td>
               <input type="checkbox" class="flipswitch" id="myCheckbox7" checked="checked" />
             </td>
-            <td id="m7">2</td>
+            <td id="m5">2</td>
             <td>Strong baseline</td>
             <td>(5)參考執行檔製作出自己的虛擬可視化圖表</td>
           </tr>
@@ -277,7 +277,7 @@
             <td>
               <input type="checkbox" class="flipswitch" id="myCheckbox5"checked="checked"  />
             </td>
-            <td id="m5">1</td>
+            <td id="m6">1</td>
             <td></td>
             <td>(6)成功讀取主題遊資料並呈現</td>
           </tr>
@@ -420,9 +420,6 @@
           score += parseInt(d3.select("#m6").html());
         }
 
-        if (d3.select("#myCheckbox7").property("checked")) {
-          score += parseInt(d3.select("#m7").html());
-        }
         d3.select("#myTotal").html(score);
       }
     </script>
