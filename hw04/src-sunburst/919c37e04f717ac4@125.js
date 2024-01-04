@@ -10,6 +10,60 @@ function _3(__query,FileAttachment,invalidation){return(
 __query(FileAttachment("artist.csv"),{from:{table:"artist-1"},sort:[],slice:{to:null,from:null},filter:[],select:{columns:null}},invalidation)
 )}
 
+function _breadcrumb(d3,breadcrumbWidth,breadcrumbHeight,sunburst,breadcrumbPoints,color)
+{
+  const svg = d3
+    .create("svg")
+    .attr("viewBox", `0 0 ${breadcrumbWidth * 10} ${breadcrumbHeight}`)
+    .style("font", "12px sans-serif")
+    .style("margin", "5px");
+
+  const g = svg
+    .selectAll("g")
+    .data(sunburst.sequence)
+    .join("g")
+    .attr("transform", (d, i) => `translate(${i * breadcrumbWidth}, 0)`);
+
+    g.append("polygon")
+      .attr("points", breadcrumbPoints)
+      .attr("fill", d => color(d.data.name))
+      .attr("stroke", "white");
+
+    g.append("text")
+      .attr("x", (breadcrumbWidth + 10) / 2)
+      .attr("y", 15)
+      .attr("dy", "0.35em")
+      .attr("text-anchor", "middle")
+      .attr("fill", "white")
+      .text(d => {
+        if(d.data.name === "減少包裝材及文宣印製") {
+          return "減少包裝";
+        }
+        else if(d.data.name === "使用無毒媒材、再生材料、廢物利用素材等") {
+          return "使用再生材料";
+        }
+        else if(d.data.name === "工作場所、活動展場的節約能源") {
+          return "節約能源";
+        }
+        else if(d.data.name.length > 6)
+        {
+          return "其他答案";
+        }
+        return d.data.name;
+      });
+
+  svg
+    .append("text")
+    .text(sunburst.percentage > 0 ? sunburst.percentage + "%" : "")
+    .attr("x", (sunburst.sequence.length + 0.5) * breadcrumbWidth)
+    .attr("y", breadcrumbHeight / 2)
+    .attr("dy", "0.35em")
+    .attr("text-anchor", "middle");
+
+  return svg.node();
+}
+
+
 function _sunburst(partition,data,d3,radius,innerQ,outerQ,width,color,arc,mousearc)
 {
   const root = partition(data);
@@ -259,7 +313,7 @@ function _sunburst(partition,data,d3,radius,innerQ,outerQ,width,color,arc,mousea
 }
 
 
-function _5(md){return(
+function _6(md){return(
 md`<h2>結論</h2>
 <h3>從上圖中，我們可以看出：
   <ul>
@@ -423,7 +477,7 @@ function breadcrumbPoints(d, i) {
 }
 )}
 
-function _19(md){return(
+function _20(md){return(
 md`<style>
 .tooltip {
   padding: 8px 12px;
@@ -444,15 +498,16 @@ export default function define(runtime, observer) {
   const main = runtime.module();
   function toString() { return this.url; }
   const fileAttachments = new Map([
-    ["artist.csv", {url: new URL("./artist.csv", import.meta.url), mimeType: "text/csv", toString}]
+     ["artist.csv", {url: new URL("./artist.csv", import.meta.url), mimeType: "text/csv", toString}]
   ]);
   main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
   main.variable(observer()).define(["md"], _1);
   main.variable(observer("artist")).define("artist", ["FileAttachment"], _artist);
   main.variable(observer()).define(["__query","FileAttachment","invalidation"], _3);
+  main.variable(observer("breadcrumb")).define("breadcrumb", ["d3","breadcrumbWidth","breadcrumbHeight","sunburst","breadcrumbPoints","color"], _breadcrumb);
   main.variable(observer("viewof sunburst")).define("viewof sunburst", ["partition","data","d3","radius","innerQ","outerQ","width","color","arc","mousearc"], _sunburst);
   main.variable(observer("sunburst")).define("sunburst", ["Generators", "viewof sunburst"], (G, _) => G.input(_));
-  main.variable(observer()).define(["md"], _5);
+  main.variable(observer()).define(["md"], _6);
   main.variable(observer("innerQ")).define("innerQ", ["artist"], _innerQ);
   main.variable(observer("outerQ")).define("outerQ", ["artist"], _outerQ);
   main.variable(observer("data")).define("data", ["artist","innerQ","outerQ","buildHierarchy"], _data);
@@ -466,6 +521,6 @@ export default function define(runtime, observer) {
   main.variable(observer("breadcrumbHeight")).define("breadcrumbHeight", _breadcrumbHeight);
   main.variable(observer("breadcrumbWidth")).define("breadcrumbWidth", _breadcrumbWidth);
   main.variable(observer("breadcrumbPoints")).define("breadcrumbPoints", ["breadcrumbWidth","breadcrumbHeight"], _breadcrumbPoints);
-  main.variable(observer()).define(["md"], _19);
+  main.variable(observer()).define(["md"], _20);
   return main;
 }
